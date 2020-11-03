@@ -19,7 +19,7 @@ and minetest.settings:get_bool("creative_mode") then
 	stairsplus.expect_infinite_stacks = true
 end
 
-function stairsplus:prepare_groups(groups)
+function stairsplus:prepare_groups(groups, disabled_in_inventory)
 	local result = {}
 	if groups then
 		for k, v in pairs(groups) do
@@ -29,6 +29,9 @@ function stairsplus:prepare_groups(groups)
 		end
 	end
 	if not moreblocks.config.stairsplus_in_creative_inventory then
+		result.not_in_creative_inventory = 1
+	end
+	if disabled_in_inventory then
 		result.not_in_creative_inventory = 1
 	end
 	return result
